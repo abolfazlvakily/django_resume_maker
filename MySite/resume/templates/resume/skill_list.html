@@ -1,0 +1,73 @@
+{% extends 'resume/base.html' %}
+{% load static %}
+
+
+{% block Work %}
+    <section id="work-section">
+        <div class="page-header">
+            <h1>skills</h1>
+        </div>
+        <ul class="thumbnails">
+            {% for skill in skill_list %}
+                <li class="span4"><a href="{{ skill.image.url }}" class="thumbnail"> <img
+                        src="{{ skill.image.url }}"
+                        alt=""> </a> <span
+                        class="thumb-caption"><strong>{{ skill.title }}</strong></span></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
+
+
+{% block info %}
+    <section id="info-section" class="information">
+        <div class="page-header">
+            <h1>Information</h1>
+        </div>
+        <ul id="information-tabs" class="nav nav-pills ">
+            <li><a href="#summary" data-toggle="tab">خلاصه</a></li>
+            <li><a href="#skills" data-toggle="tab">مهارت ها</a></li>
+        </ul>
+        <!-- tab content -->
+        <div class="tab-content">
+            <!-- Summary -->
+            <div dir='rtl' class="summary-section tab-pane active" id="summary">
+                <p>
+                    <strong>در کد html این جمله بلد می باشد</strong>
+                    درباره علاقه مندی و کار خود به طور خلاصه در html توضیح دهید
+                </p>
+
+            </div>
+            <!-- ENDS Summary -->
+            <!-- Skills -->
+            <div dir='rtl' class="tab-pane listing" id="skills">
+                {% for resume in skill_list %}
+                    <div class="entry">
+                        <div class="clearfix">
+                            <div class="rating p">
+                                {% if resume.priority == 1 %}
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                {% endif %}
+
+                                {% if resume.priority == 2 %}
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                {% endif %}
+
+                                {% if resume.priority == 3 %}
+                                    <i class="icon-star"></i>
+                                {% endif %}
+                            </div>
+                            <h3 class="heading pull-leasft">{{resume.title}}</h3>
+                        </div>
+                        <p>{{ resume.description|safe }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- ENDS Skills -->
+        </div>
+        <!-- ENDS tab content -->
+    </section>
+{% endblock %}
